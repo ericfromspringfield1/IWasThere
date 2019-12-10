@@ -8,7 +8,9 @@ namespace IWasThere.Models
     {
         [Key]
         public int GameId { get; set; }
-        public string Name { get; set; }
+        public string GameName { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
         [Required]
