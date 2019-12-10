@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using IWasThere.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,5 +14,6 @@ namespace IWasThere.Data
         {
 
         }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
