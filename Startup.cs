@@ -12,6 +12,7 @@ using IWasThere.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using IWasThere.Models;
 
 namespace IWasThere
 {

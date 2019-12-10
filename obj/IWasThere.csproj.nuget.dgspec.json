@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere\\IWasThere.csproj": {}
+    "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere\\IWasThere.csproj": {
+    "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere\\IWasThere.csproj",
+        "projectUniqueName": "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere.csproj",
         "projectName": "IWasThere",
-        "projectPath": "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere\\IWasThere.csproj",
+        "projectPath": "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere.csproj",
         "packagesPath": "C:\\Users\\Eric\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eric\\workspace\\IWasThere\\IWasThere\\obj\\",
+        "outputPath": "C:\\Users\\Eric\\workspace\\IWasThere\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Eric\\AppData\\Roaming\\NuGet\\NuGet.Config",
