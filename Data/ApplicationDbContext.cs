@@ -166,7 +166,7 @@ namespace IWasThere.Data
                    UserGameId = 2,
                    UserId = "00000000 - ffff - ffff - ffff - ffffffffffff2",
                    GameId = 2,
-                   Story = "I got a little too conservative. Pip pip pip."
+                   Story = "I shoulda punted on third down more."
                }
             );
         }
