@@ -23,10 +23,9 @@ namespace IWasThere.Models
         public string LastName { get; set; }
 
         //Do we need Game, Team, and Location or just UserGame?
-        public virtual ICollection<Game> Games { get; set; }
-        public virtual ICollection<Team> Teams { get; set; }
-        public virtual ICollection<Location> Locations { get; set; }
-
-        //public virtual ICollection<UserGame> UserGames { get; set; }
+        public List<Game> Games { get; set; }
+        public List<Team> Teams { get; set; }
+        public List<Location> Locations { get; set; }
+        public List<UserGame> UserGames { get; set; }
     }
 }
