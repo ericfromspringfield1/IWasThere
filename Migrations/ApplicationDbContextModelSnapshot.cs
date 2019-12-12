@@ -47,41 +47,26 @@ namespace IWasThere.Migrations
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("GameId");
 
+                    b.HasIndex("AwayTeamId");
+
+                    b.HasIndex("HomeTeamId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("TeamId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Game");
-
-                    b.HasData(
-                        new
-                        {
-                            GameId = 1,
-                            AwayScore = 27,
-                            AwayTeamId = 2,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameName = "Camback",
-                            HomeScore = 27,
-                            HomeTeamId = 1,
-                            LocationId = 1,
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        },
-                        new
-                        {
-                            GameId = 2,
-                            AwayScore = 9,
-                            AwayTeamId = 1,
-                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GameName = "The Kick 2",
-                            HomeScore = 6,
-                            HomeTeamId = 3,
-                            LocationId = 2,
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Location", b =>
@@ -111,24 +96,6 @@ namespace IWasThere.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Location");
-
-                    b.HasData(
-                        new
-                        {
-                            LocationId = 1,
-                            City = "Tuscaloosa",
-                            StadiumName = "Bryant-Denny Stadium",
-                            State = "Alabama",
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        },
-                        new
-                        {
-                            LocationId = 2,
-                            City = "Knoxville",
-                            StadiumName = "Neyland Stadium",
-                            State = "Tennessee",
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>
@@ -138,9 +105,6 @@ namespace IWasThere.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(max)");
 
@@ -148,36 +112,14 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TeamId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Team");
-
-                    b.HasData(
-                        new
-                        {
-                            TeamId = 1,
-                            Nickname = "Crimson Tide",
-                            TeamName = "Alabama",
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        },
-                        new
-                        {
-                            TeamId = 2,
-                            Nickname = "Tigers",
-                            TeamName = "Auburn",
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        },
-                        new
-                        {
-                            TeamId = 3,
-                            Nickname = "Volunteers",
-                            TeamName = "Tennessee",
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
-                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.UserGame", b =>
@@ -186,6 +128,9 @@ namespace IWasThere.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");
@@ -198,25 +143,9 @@ namespace IWasThere.Migrations
 
                     b.HasKey("UserGameId");
 
-                    b.HasIndex("GameId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("UserGame");
-
-                    b.HasData(
-                        new
-                        {
-                            UserGameId = 1,
-                            GameId = 1,
-                            Story = "Roll Damn Tide, Pawwwwl. Sorry 'bout dem trees.",
-                            UserId = "00000000 - ffff - ffff - ffff - ffffffffffff1"
-                        },
-                        new
-                        {
-                            UserGameId = 2,
-                            GameId = 2,
-                            Story = "I shoulda punted on third down more.",
-                            UserId = "00000000 - ffff - ffff - ffff - ffffffffffff2"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -438,66 +367,34 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "00000000-ffff-ffff-ffff-ffffffffffff",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb909f0c-534a-4f41-9099-9e6ab1778eaf",
-                            Email = "admin@admin.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@ADMIN.COM",
-                            NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN5TU3XWFF4wKJ71nWpgyz9GerwDFEPL7bb4nwfe+4XJccYpVKFZbqGRC9yrC5ii+A==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@admin.com",
-                            FirstName = "Admina",
-                            LastName = "Straytor"
-                        },
-                        new
-                        {
-                            Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "eac0dd79-d1db-4f38-b202-2130209d209d",
-                            Email = "harvey@harvey.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "HARVEY@HARVEY.COM",
-                            NormalizedUserName = "HARVEY@HARVEY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDLQrn2Ndh7hfjdaRfvFa057i5Bv86KorjQ0yoPayBIzDZRRVQCj1FeQQC1W3APtpg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
-                            TwoFactorEnabled = false,
-                            UserName = "harvey@harvey.com",
-                            FirstName = "Harvey",
-                            LastName = "Updyke"
-                        },
-                        new
-                        {
-                            Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "44b20992-9474-4dd3-86da-07e9d76b01ad",
-                            Email = "johnny@johnny.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JOHNNY@JOHNNY.COM",
-                            NormalizedUserName = "JOHNNY@JOHNNY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJx0Cr0DSZ2CbF+0zDsoHFBRpJQVHPkt5PSPrcuNOCNUjgKRCZFqU9tX60uYxSHL4g==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
-                            TwoFactorEnabled = false,
-                            UserName = "johnny@johnny.com",
-                            FirstName = "Johnny",
-                            LastName = "Majors"
-                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Game", b =>
                 {
+                    b.HasOne("IWasThere.Models.Team", "AwayTeam")
+                        .WithMany()
+                        .HasForeignKey("AwayTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IWasThere.Models.Team", "HomeTeam")
+                        .WithMany()
+                        .HasForeignKey("HomeTeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IWasThere.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IWasThere.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Games")
                         .HasForeignKey("UserId")
@@ -514,18 +411,18 @@ namespace IWasThere.Migrations
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>
                 {
-                    b.HasOne("IWasThere.Models.ApplicationUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Teams")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IWasThere.Models.UserGame", b =>
                 {
-                    b.HasOne("IWasThere.Models.Game", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", null)
                         .WithMany("UserGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

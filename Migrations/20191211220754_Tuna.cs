@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IWasThere.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Tuna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -156,32 +156,6 @@ namespace IWasThere.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
-                columns: table => new
-                {
-                    GameId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GameName = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
-                    LocationId = table.Column<int>(nullable: false),
-                    HomeTeamId = table.Column<int>(nullable: false),
-                    HomeScore = table.Column<int>(nullable: false),
-                    AwayTeamId = table.Column<int>(nullable: false),
-                    AwayScore = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Game", x => x.GameId);
-                    table.ForeignKey(
-                        name: "FK_Game_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
@@ -212,18 +186,17 @@ namespace IWasThere.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeamName = table.Column<string>(nullable: true),
                     Nickname = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Team", x => x.TeamId);
                     table.ForeignKey(
-                        name: "FK_Team_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_Team_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,67 +207,70 @@ namespace IWasThere.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: true),
                     GameId = table.Column<int>(nullable: false),
-                    Story = table.Column<string>(nullable: true)
+                    Story = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserGame", x => x.UserGameId);
                     table.ForeignKey(
-                        name: "FK_UserGame_Game_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Game",
-                        principalColumn: "GameId",
+                        name: "FK_UserGame_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Game",
+                columns: table => new
+                {
+                    GameId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GameName = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    LocationId = table.Column<int>(nullable: false),
+                    TeamId = table.Column<int>(nullable: false),
+                    HomeTeamId = table.Column<int>(nullable: false),
+                    HomeScore = table.Column<int>(nullable: false),
+                    AwayTeamId = table.Column<int>(nullable: false),
+                    AwayScore = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Game", x => x.GameId);
+                    table.ForeignKey(
+                        name: "FK_Game_Team_AwayTeamId",
+                        column: x => x.AwayTeamId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Game_Team_HomeTeamId",
+                        column: x => x.HomeTeamId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Game_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Game_Team_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Game_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "FirstName", "LastName" },
-                values: new object[,]
-                {
-                    { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "fb909f0c-534a-4f41-9099-9e6ab1778eaf", "ApplicationUser", "admin@admin.com", true, false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEN5TU3XWFF4wKJ71nWpgyz9GerwDFEPL7bb4nwfe+4XJccYpVKFZbqGRC9yrC5ii+A==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com", "Admina", "Straytor" },
-                    { "00000000-ffff-ffff-ffff-ffffffffffff1", 0, "eac0dd79-d1db-4f38-b202-2130209d209d", "ApplicationUser", "harvey@harvey.com", true, false, null, "HARVEY@HARVEY.COM", "HARVEY@HARVEY.COM", "AQAAAAEAACcQAAAAEDLQrn2Ndh7hfjdaRfvFa057i5Bv86KorjQ0yoPayBIzDZRRVQCj1FeQQC1W3APtpg==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794578", false, "harvey@harvey.com", "Harvey", "Updyke" },
-                    { "00000000-ffff-ffff-ffff-ffffffffffff2", 0, "44b20992-9474-4dd3-86da-07e9d76b01ad", "ApplicationUser", "johnny@johnny.com", true, false, null, "JOHNNY@JOHNNY.COM", "JOHNNY@JOHNNY.COM", "AQAAAAEAACcQAAAAEJx0Cr0DSZ2CbF+0zDsoHFBRpJQVHPkt5PSPrcuNOCNUjgKRCZFqU9tX60uYxSHL4g==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794590", false, "johnny@johnny.com", "Johnny", "Majors" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Location",
-                columns: new[] { "LocationId", "ApplicationUserId", "City", "StadiumName", "State", "UserId" },
-                values: new object[,]
-                {
-                    { 1, null, "Tuscaloosa", "Bryant-Denny Stadium", "Alabama", "00000000-ffff-ffff-ffff-ffffffffffff" },
-                    { 2, null, "Knoxville", "Neyland Stadium", "Tennessee", "00000000-ffff-ffff-ffff-ffffffffffff" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Team",
-                columns: new[] { "TeamId", "ApplicationUserId", "Nickname", "TeamName", "UserId" },
-                values: new object[,]
-                {
-                    { 1, null, "Crimson Tide", "Alabama", "00000000-ffff-ffff-ffff-ffffffffffff" },
-                    { 2, null, "Tigers", "Auburn", "00000000-ffff-ffff-ffff-ffffffffffff" },
-                    { 3, null, "Volunteers", "Tennessee", "00000000-ffff-ffff-ffff-ffffffffffff" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Game",
-                columns: new[] { "GameId", "AwayScore", "AwayTeamId", "Date", "GameName", "HomeScore", "HomeTeamId", "LocationId", "UserId" },
-                values: new object[] { 1, 27, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Camback", 27, 1, 1, "00000000-ffff-ffff-ffff-ffffffffffff" });
-
-            migrationBuilder.InsertData(
-                table: "Game",
-                columns: new[] { "GameId", "AwayScore", "AwayTeamId", "Date", "GameName", "HomeScore", "HomeTeamId", "LocationId", "UserId" },
-                values: new object[] { 2, 9, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Kick 2", 6, 3, 2, "00000000-ffff-ffff-ffff-ffffffffffff" });
-
-            migrationBuilder.InsertData(
-                table: "UserGame",
-                columns: new[] { "UserGameId", "GameId", "Story", "UserId" },
-                values: new object[] { 1, 1, "Roll Damn Tide, Pawwwwl. Sorry 'bout dem trees.", "00000000 - ffff - ffff - ffff - ffffffffffff1" });
-
-            migrationBuilder.InsertData(
-                table: "UserGame",
-                columns: new[] { "UserGameId", "GameId", "Story", "UserId" },
-                values: new object[] { 2, 2, "I shoulda punted on third down more.", "00000000 - ffff - ffff - ffff - ffffffffffff2" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -336,6 +312,26 @@ namespace IWasThere.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Game_AwayTeamId",
+                table: "Game",
+                column: "AwayTeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_HomeTeamId",
+                table: "Game",
+                column: "HomeTeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_LocationId",
+                table: "Game",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_TeamId",
+                table: "Game",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Game_UserId",
                 table: "Game",
                 column: "UserId");
@@ -346,14 +342,14 @@ namespace IWasThere.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Team_ApplicationUserId",
+                name: "IX_Team_UserId",
                 table: "Team",
-                column: "ApplicationUserId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserGame_GameId",
+                name: "IX_UserGame_ApplicationUserId",
                 table: "UserGame",
-                column: "GameId");
+                column: "ApplicationUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -374,10 +370,7 @@ namespace IWasThere.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Location");
-
-            migrationBuilder.DropTable(
-                name: "Team");
+                name: "Game");
 
             migrationBuilder.DropTable(
                 name: "UserGame");
@@ -386,7 +379,10 @@ namespace IWasThere.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "Team");
+
+            migrationBuilder.DropTable(
+                name: "Location");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

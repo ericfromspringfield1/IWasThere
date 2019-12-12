@@ -21,12 +21,25 @@ namespace IWasThere.Data
         public DbSet<Location> Location { get; set; }
         public DbSet<UserGame> UserGame { get; set; }
 
+        /*
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+             
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Teams)
+                .WithOne(t => t.User)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(u => u.Games)
+                .WithOne(t => t.User)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
 
             ApplicationUser user = new ApplicationUser
             {
@@ -78,55 +91,28 @@ namespace IWasThere.Data
             johnny.PasswordHash = passwordHash.HashPassword(johnny, "Admin8*");
             modelBuilder.Entity<ApplicationUser>().HasData(johnny);
 
-            modelBuilder.Entity<Game>().HasData(
-               new Game()
-               {
-                   GameId = 1,
-                   UserId = user.Id,
-                   GameName = "Camback",
-                   Date = new DateTime(11/26/2010),
-                   LocationId = 1,
-                   HomeTeamId = 1,
-                   HomeScore = 27,
-                   AwayTeamId = 2,
-                   AwayScore = 27,
-               },
-
-               new Game()
-               {
-                   GameId = 2,
-                   UserId = user.Id,
-                   GameName = "The Kick 2",
-                   Date = new DateTime(10/20/1990),
-                   LocationId = 2,
-                   HomeTeamId = 3,
-                   HomeScore = 6,
-                   AwayTeamId = 1,
-                   AwayScore = 9
-               }
-             );
-
+            
             modelBuilder.Entity<Team>().HasData(
                new Team()
                {
-                   TeamId = 1,
                    UserId = user.Id,
+                   TeamId = 1,
                    TeamName = "Alabama",
                    Nickname = "Crimson Tide"
                },
 
                new Team()
                {
-                   TeamId = 2,
                    UserId = user.Id,
+                   TeamId = 2,
                    TeamName = "Auburn",
                    Nickname = "Tigers"
                },
 
                new Team()
                {
-                   TeamId = 3,
                    UserId = user.Id,
+                   TeamId = 3,
                    TeamName = "Tennessee",
                    Nickname = "Volunteers"
                }
@@ -152,6 +138,35 @@ namespace IWasThere.Data
                }
             );
 
+            modelBuilder.Entity<Game>().HasData(
+               new Game()
+               {
+                   GameId = 1,
+                   UserId = user.Id,
+                   GameName = "Camback",
+                   Date = new DateTime(11 / 26 / 2010),
+                   LocationId = 1,
+                   HomeTeamId = 1,
+                   HomeScore = 27,
+                   AwayTeamId = 2,
+                   AwayScore = 28,
+               },
+
+               new Game()
+               {
+                   GameId = 2,
+                   UserId = user.Id,
+                   GameName = "The Kick 2",
+                   Date = new DateTime(10 / 20 / 1990),
+                   LocationId = 2,
+                   HomeTeamId = 3,
+                   HomeScore = 6,
+                   AwayTeamId = 1,
+                   AwayScore = 9
+               }
+             );
+
+
             modelBuilder.Entity<UserGame>().HasData(
                new UserGame()
                {
@@ -168,8 +183,11 @@ namespace IWasThere.Data
                    GameId = 2,
                    Story = "I shoulda punted on third down more."
                }
+
             );
         }
+            */
+
 
     }
 }
