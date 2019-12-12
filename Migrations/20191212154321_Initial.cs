@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IWasThere.Migrations
 {
-    public partial class Tuna : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -196,7 +196,7 @@ namespace IWasThere.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -231,7 +231,7 @@ namespace IWasThere.Migrations
                     Date = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: false),
                     LocationId = table.Column<int>(nullable: false),
-                    TeamId = table.Column<int>(nullable: false),
+                    TeamId = table.Column<int>(nullable: true),
                     HomeTeamId = table.Column<int>(nullable: false),
                     HomeScore = table.Column<int>(nullable: false),
                     AwayTeamId = table.Column<int>(nullable: false),
@@ -245,32 +245,85 @@ namespace IWasThere.Migrations
                         column: x => x.AwayTeamId,
                         principalTable: "Team",
                         principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_Team_HomeTeamId",
                         column: x => x.HomeTeamId,
                         principalTable: "Team",
                         principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_Location_LocationId",
                         column: x => x.LocationId,
                         principalTable: "Location",
                         principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_Team_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Team",
                         principalColumn: "TeamId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Game_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "FirstName", "LastName" },
+                values: new object[,]
+                {
+                    { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "e64da7f0-20f8-49b4-a7b3-88d994dadfce", "ApplicationUser", "admin@admin.com", true, false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEIcD/BsTgxKyCbbzu3+j+gti34ZJCWw2Ork5ec2g0OYYarpAbsG6zIZBQ0DUJKss5g==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com", "Admina", "Straytor" },
+                    { "00000000-ffff-ffff-ffff-ffffffffffff1", 0, "5ae71544-f189-4070-8448-c96487079597", "ApplicationUser", "harvey@harvey.com", true, false, null, "HARVEY@HARVEY.COM", "HARVEY@HARVEY.COM", "AQAAAAEAACcQAAAAEE9X61zcp4dyzNiIRgraqMIUfSF0Pwua/w17non08d4Z1P/uofNc7L9QSeU7RlhRSw==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794578", false, "harvey@harvey.com", "Harvey", "Updyke" },
+                    { "00000000-ffff-ffff-ffff-ffffffffffff2", 0, "9552c1c4-bde8-41cd-9707-21f6898f4686", "ApplicationUser", "johnny@johnny.com", true, false, null, "JOHNNY@JOHNNY.COM", "JOHNNY@JOHNNY.COM", "AQAAAAEAACcQAAAAEO9t6bpTPpabWaAdR5LkXRYHhlZ4BV7Y2e0pxJ6dFYTZB/3LpoWm4WazxVLAqDkBMQ==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794590", false, "johnny@johnny.com", "Johnny", "Majors" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "LocationId", "ApplicationUserId", "City", "StadiumName", "State", "UserId" },
+                values: new object[,]
+                {
+                    { 1, null, "Tuscaloosa", "Bryant-Denny Stadium", "Alabama", "00000000-ffff-ffff-ffff-ffffffffffff" },
+                    { 2, null, "Knoxville", "Neyland Stadium", "Tennessee", "00000000-ffff-ffff-ffff-ffffffffffff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserGame",
+                columns: new[] { "UserGameId", "ApplicationUserId", "GameId", "Story", "UserId" },
+                values: new object[,]
+                {
+                    { 1, null, 1, "Roll Damn Tide, Pawwwwl. Sorry 'bout dem trees.", "00000000 - ffff - ffff - ffff - ffffffffffff1" },
+                    { 2, null, 2, "I shoulda punted on third down more.", "00000000 - ffff - ffff - ffff - ffffffffffff2" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Team",
+                columns: new[] { "TeamId", "Nickname", "TeamName", "UserId" },
+                values: new object[] { 1, "Crimson Tide", "Alabama", "00000000-ffff-ffff-ffff-ffffffffffff" });
+
+            migrationBuilder.InsertData(
+                table: "Team",
+                columns: new[] { "TeamId", "Nickname", "TeamName", "UserId" },
+                values: new object[] { 2, "Tigers", "Auburn", "00000000-ffff-ffff-ffff-ffffffffffff" });
+
+            migrationBuilder.InsertData(
+                table: "Team",
+                columns: new[] { "TeamId", "Nickname", "TeamName", "UserId" },
+                values: new object[] { 3, "Volunteers", "Tennessee", "00000000-ffff-ffff-ffff-ffffffffffff" });
+
+            migrationBuilder.InsertData(
+                table: "Game",
+                columns: new[] { "GameId", "AwayScore", "AwayTeamId", "Date", "GameName", "HomeScore", "HomeTeamId", "LocationId", "UserId" },
+                values: new object[] { 1, 28, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Camback", 27, 1, 1, "00000000-ffff-ffff-ffff-ffffffffffff" });
+
+            migrationBuilder.InsertData(
+                table: "Game",
+                columns: new[] { "GameId", "AwayScore", "AwayTeamId", "Date", "GameName", "HomeScore", "HomeTeamId", "LocationId",  "UserId" },
+                values: new object[] { 2, 9, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Kick 2", 6, 3, 2, "00000000-ffff-ffff-ffff-ffffffffffff" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

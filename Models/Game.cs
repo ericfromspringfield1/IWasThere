@@ -19,7 +19,7 @@ namespace IWasThere.Models
         public ApplicationUser User { get; set; }
         public int LocationId { get; set; }
         public Location Location { get; set; }
-        public int TeamId { get; set; }
+        public int? TeamId { get; set; }
         public Team Team { get; set; }
         public int HomeTeamId { get; set; }
         public Team HomeTeam { get; set; }

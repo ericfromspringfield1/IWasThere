@@ -21,7 +21,7 @@ namespace IWasThere.Data
         public DbSet<Location> Location { get; set; }
         public DbSet<UserGame> UserGame { get; set; }
 
-        /*
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -186,7 +186,7 @@ namespace IWasThere.Data
 
             );
         }
-            */
+            
 
 
     }

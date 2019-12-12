@@ -67,6 +67,34 @@ namespace IWasThere.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Game");
+
+                    b.HasData(
+                        new
+                        {
+                            GameId = 1,
+                            AwayScore = 28,
+                            AwayTeamId = 2,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GameName = "Camback",
+                            HomeScore = 27,
+                            HomeTeamId = 1,
+                            LocationId = 1,
+                            TeamId = 0,
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
+                            GameId = 2,
+                            AwayScore = 9,
+                            AwayTeamId = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GameName = "The Kick 2",
+                            HomeScore = 6,
+                            HomeTeamId = 3,
+                            LocationId = 2,
+                            TeamId = 0,
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Location", b =>
@@ -96,6 +124,24 @@ namespace IWasThere.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Location");
+
+                    b.HasData(
+                        new
+                        {
+                            LocationId = 1,
+                            City = "Tuscaloosa",
+                            StadiumName = "Bryant-Denny Stadium",
+                            State = "Alabama",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
+                            LocationId = 2,
+                            City = "Knoxville",
+                            StadiumName = "Neyland Stadium",
+                            State = "Tennessee",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>
@@ -120,6 +166,29 @@ namespace IWasThere.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Team");
+
+                    b.HasData(
+                        new
+                        {
+                            TeamId = 1,
+                            Nickname = "Crimson Tide",
+                            TeamName = "Alabama",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
+                            TeamId = 2,
+                            Nickname = "Tigers",
+                            TeamName = "Auburn",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        },
+                        new
+                        {
+                            TeamId = 3,
+                            Nickname = "Volunteers",
+                            TeamName = "Tennessee",
+                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.UserGame", b =>
@@ -146,6 +215,22 @@ namespace IWasThere.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("UserGame");
+
+                    b.HasData(
+                        new
+                        {
+                            UserGameId = 1,
+                            GameId = 1,
+                            Story = "Roll Damn Tide, Pawwwwl. Sorry 'bout dem trees.",
+                            UserId = "00000000 - ffff - ffff - ffff - ffffffffffff1"
+                        },
+                        new
+                        {
+                            UserGameId = 2,
+                            GameId = 2,
+                            Story = "I shoulda punted on third down more.",
+                            UserId = "00000000 - ffff - ffff - ffff - ffffffffffff2"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -367,6 +452,62 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e64da7f0-20f8-49b4-a7b3-88d994dadfce",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIcD/BsTgxKyCbbzu3+j+gti34ZJCWw2Ork5ec2g0OYYarpAbsG6zIZBQ0DUJKss5g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@admin.com",
+                            FirstName = "Admina",
+                            LastName = "Straytor"
+                        },
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5ae71544-f189-4070-8448-c96487079597",
+                            Email = "harvey@harvey.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "HARVEY@HARVEY.COM",
+                            NormalizedUserName = "HARVEY@HARVEY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE9X61zcp4dyzNiIRgraqMIUfSF0Pwua/w17non08d4Z1P/uofNc7L9QSeU7RlhRSw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
+                            TwoFactorEnabled = false,
+                            UserName = "harvey@harvey.com",
+                            FirstName = "Harvey",
+                            LastName = "Updyke"
+                        },
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9552c1c4-bde8-41cd-9707-21f6898f4686",
+                            Email = "johnny@johnny.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHNNY@JOHNNY.COM",
+                            NormalizedUserName = "JOHNNY@JOHNNY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO9t6bpTPpabWaAdR5LkXRYHhlZ4BV7Y2e0pxJ6dFYTZB/3LpoWm4WazxVLAqDkBMQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
+                            TwoFactorEnabled = false,
+                            UserName = "johnny@johnny.com",
+                            FirstName = "Johnny",
+                            LastName = "Majors"
+                        });
                 });
 
             modelBuilder.Entity("IWasThere.Models.Game", b =>
@@ -398,7 +539,7 @@ namespace IWasThere.Migrations
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Games")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -414,7 +555,7 @@ namespace IWasThere.Migrations
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Teams")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
