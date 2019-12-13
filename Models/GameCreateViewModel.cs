@@ -10,7 +10,9 @@ namespace IWasThere.Models
     {
         public Game Game { get; set; }
         public List<Team> Teams { get; set; }
-        public List<SelectListItem> HomeTeamOptions
+        public List<Location> Locations { get; set; }
+
+        public List<SelectListItem> HomeTeamOptions 
         {
             get
             {
@@ -24,6 +26,15 @@ namespace IWasThere.Models
             get
             {
                 return Teams?.Select(t => new SelectListItem(t.TeamName, t.TeamId.ToString())).ToList();
+
+            }
+
+        }
+        public List<SelectListItem> LocationOptions
+        {
+            get
+            {
+                return Locations?.Select(l => new SelectListItem(l.StadiumName, l.LocationId.ToString())).ToList();
 
             }
 
