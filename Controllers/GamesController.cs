@@ -30,10 +30,9 @@ namespace IWasThere.Controllers
         {
             var user = await GetCurrentUserAsync();
             var games = _context.Game
-                .Include(g => g.AwayTeam)
-                .Include(g => g.HomeTeam)
+                .Include(g => g.Team)
+                .Include(g => g.Team)
                 .Include(g => g.Location)
-                .Include(g => g.User)
                 .Where(g => g.UserId == user.Id);
 
             return View(await games.ToListAsync());
@@ -50,11 +49,11 @@ namespace IWasThere.Controllers
             var user = await GetCurrentUserAsync();
             var game = await _context.Game
                 .Include(g => g.AwayTeam)
-                .Include(g=> g.AwayScore)
+                .Include(g => g.AwayScore)
                 .Include(g => g.HomeTeam)
-                .Include(g=> g.HomeScore)
+                .Include(g => g.HomeScore)
                 .Include(g => g.Location)
-                .Include(g => g.User)
+                .Include(g => g.UserId)
                 .Where(g => g.UserId == user.Id)
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
@@ -71,6 +70,7 @@ namespace IWasThere.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var viewModel = new GameCreateViewModel()
             {
+
                 Teams = await _context.Team
                 .Where(t => t.UserId == user.Id).ToListAsync(),
                 Locations = await _context.Location
@@ -84,26 +84,32 @@ namespace IWasThere.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(GameCreateViewModel viewModel)
+        public async Task<IActionResult> Create([Bind("GameId,GameName,Date,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] GameCreateViewModel viewModel)
         {
-            var user = await GetCurrentUserAsync();
-            ModelState.Remove("User");
-            ModelState.Remove("UserId");
+           var user = await GetCurrentUserAsync();
+            //ModelState.Remove("User");
+            //ModelState.Remove("UserId");
             if (ModelState.IsValid)
             {
-                viewModel.Game.UserId = user.Id;
-                _context.Add(viewModel.Game);
+                viewModel.UserId = user.Id;
+                //_context.Add(viewModel.Game.GameName);
+                //_context.Add(viewModel.Game.Date);
+                _context.Add(viewModel);
+               // _context.Add(viewModel.Game.HomeTeam);
+               // _context.Add(viewModel.Game.HomeScore);
+               // _context.Add(viewModel.Game.AwayTeam);
+               // _context.Add(viewModel.Game.AwayScore);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
+            
+            ViewData["AwayTeamId"] = new SelectList(_context.Game, "TeamId", "UserId", viewModel.Game.TeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Game, "TeamId", "UserId", viewModel.Game.TeamId);
+            ViewData["LocationId"] = new SelectList(_context.Game, "LocationId", "LocationId", viewModel.Game.LocationId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", viewModel.Game.UserId); 
             return View(viewModel);
+
         }
-            /* ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", game.LocationId);
-            ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId); */
 
 
         // GET: Games/Edit/5
@@ -119,10 +125,9 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", game.LocationId);
-            ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.TeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.TeamId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
         }
@@ -132,19 +137,24 @@ namespace IWasThere.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,UserId,LocationId,TeamId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] Game game)
         {
             if (id != game.GameId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var user = await GetCurrentUserAsync();
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
+                if (ModelState.IsValid)
             {
                 try
                 {
+                    game.UserId = user.Id;
                     _context.Update(game);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -157,12 +167,10 @@ namespace IWasThere.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.AwayTeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.HomeTeamId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", game.LocationId);
-            ViewData["TeamId"] = new SelectList(_context.Team, "TeamId", "UserId", game.TeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.AwayTeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.HomeTeamId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
         }

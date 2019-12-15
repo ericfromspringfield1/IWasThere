@@ -21,14 +21,17 @@ namespace IWasThere.Data
         public DbSet<Location> Location { get; set; }
         public DbSet<UserGame> UserGame { get; set; }
 
-        
+       
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-             
+
+            modelBuilder.Entity<GameCreateViewModel>().ToTable("Game");
+
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Teams)
                 .WithOne(t => t.User)
@@ -92,7 +95,7 @@ namespace IWasThere.Data
             modelBuilder.Entity<ApplicationUser>().HasData(johnny);
 
             
-            modelBuilder.Entity<Team>().HasData(
+            /*modelBuilder.Entity<Team>().HasData(
                new Team()
                {
                    UserId = user.Id,
@@ -144,7 +147,7 @@ namespace IWasThere.Data
                    GameId = 1,
                    UserId = user.Id,
                    GameName = "Camback",
-                   Date = new DateTime(11 / 26 / 2010),
+                   Date =new DateTime(11 / 26 / 2010),
                    LocationId = 1,
                    HomeTeamId = 1,
                    HomeScore = 27,
@@ -184,7 +187,7 @@ namespace IWasThere.Data
                    Story = "I shoulda punted on third down more."
                }
 
-            );
+            );*/
         }
             
 

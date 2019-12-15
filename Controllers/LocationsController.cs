@@ -112,7 +112,7 @@ namespace IWasThere.Controllers
             var user = await GetCurrentUserAsync();
             ModelState.Remove("User");
             ModelState.Remove("UserId");
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
                 try
                 {

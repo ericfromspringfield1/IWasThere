@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IWasThere.Models.GameCreateViewModel>
+﻿@model IEnumerable<IWasThere.Models.Game>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,28 +13,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Game.GameName)
+                @Html.DisplayNameFor(model => model.GameName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.Date)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.User)
+                @Html.DisplayNameFor(model => model.Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.Location)
+                @Html.DisplayNameFor(model => model.HomeTeam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.HomeTeam)
+                @Html.DisplayNameFor(model => model.HomeScore)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.HomeScore)
+                @Html.DisplayNameFor(model => model.AwayTeam)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Game.AwayTeam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Game.AwayScore)
+                @Html.DisplayNameFor(model => model.AwayScore)
             </th>
             <th></th>
         </tr>
@@ -43,36 +40,30 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.GameName)
+                @Html.DisplayFor(modelItem => item.GameName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.Date)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.User.Id)
+                @Html.DisplayFor(modelItem => item.LocationId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.Location.LocationId)
+                @Html.DisplayFor(modelItem => item.HomeTeamId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.Team.UserId)
+                @Html.DisplayFor(modelItem => item.HomeScore)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.HomeTeam.UserId)
+                @Html.DisplayFor(modelItem => item.AwayTeamId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.HomeScore)
+                @Html.DisplayFor(modelItem => item.AwayScore)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Game.AwayTeam.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Game.AwayScore)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Game.GameId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Game.GameId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Game.GameId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item,GameId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item,GameId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GameId">Delete</a>
             </td>
         </tr>
 }

@@ -9,8 +9,11 @@ namespace IWasThere.Models
     public class GameCreateViewModel
     {
         public Game Game { get; set; }
+        public int GameId { get; set; }
         public List<Team> Teams { get; set; }
+        public int TeamId { get; set; }
         public List<Location> Locations { get; set; }
+        public string UserId { get; set; }
 
         public List<SelectListItem> HomeTeamOptions 
         {
