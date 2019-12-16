@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,9 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IWasThere.Models
 {
+        [Authorize]
     public class Game
     {
-        [Key]
         public int GameId { get; set; }
         public string GameName { get; set; }
 

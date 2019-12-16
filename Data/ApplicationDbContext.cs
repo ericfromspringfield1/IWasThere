@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using IWasThere.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace IWasThere.Data
@@ -22,7 +24,6 @@ namespace IWasThere.Data
         public DbSet<UserGame> UserGame { get; set; }
 
        
-       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -30,7 +31,6 @@ namespace IWasThere.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            modelBuilder.Entity<GameCreateViewModel>().ToTable("Game");
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Teams)
@@ -41,7 +41,6 @@ namespace IWasThere.Data
                 .HasMany(u => u.Games)
                 .WithOne(t => t.User)
                 .OnDelete(DeleteBehavior.Restrict);
-
 
 
             ApplicationUser user = new ApplicationUser

@@ -84,29 +84,22 @@ namespace IWasThere.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GameId,GameName,Date,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] GameCreateViewModel viewModel)
+        public async Task<IActionResult> Create (GameCreateViewModel viewModel)
         {
-           var user = await GetCurrentUserAsync();
-            //ModelState.Remove("User");
-            //ModelState.Remove("UserId");
+            ModelState.Remove("Game.UserId");
             if (ModelState.IsValid)
             {
-                viewModel.UserId = user.Id;
-                //_context.Add(viewModel.Game.GameName);
-                //_context.Add(viewModel.Game.Date);
-                _context.Add(viewModel);
-               // _context.Add(viewModel.Game.HomeTeam);
-               // _context.Add(viewModel.Game.HomeScore);
-               // _context.Add(viewModel.Game.AwayTeam);
-               // _context.Add(viewModel.Game.AwayScore);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                viewModel.Game.UserId = user.Id;
+                _context.Add(viewModel.Game);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewData["AwayTeamId"] = new SelectList(_context.Game, "TeamId", "UserId", viewModel.Game.TeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Game, "TeamId", "UserId", viewModel.Game.TeamId);
-            ViewData["LocationId"] = new SelectList(_context.Game, "LocationId", "LocationId", viewModel.Game.LocationId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", viewModel.Game.UserId); 
+            ViewData["HomeTeamId"] = new SelectList(_context.Game, "HomeTeamId", "UserId", viewModel.HomeTeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Game, "AwayTeamId", "UserId", viewModel.AwayTeamId);
+            ViewData["LocationId"] = new SelectList(_context.Game, "LocationId", "LocationId", viewModel.LocationId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", viewModel.UserId); 
             return View(viewModel);
 
         }
