@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWasThere.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191211220754_Tuna")]
-    partial class Tuna
+    [Migration("20191218032059_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,135 @@ namespace IWasThere.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("IWasThere.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "133a3389-a7f1-44fe-9e1d-3fca610fe9d5",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admina",
+                            LastName = "Straytor",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAED0It0IbIo+OviK72L/aVvrCga84yuIrjCYzuqGSyEdJQ6dRYzue0NBFPOpsUpY3tA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@admin.com"
+                        },
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5695900a-c18e-436b-9a9e-f27af94aa7b1",
+                            Email = "harvey@harvey.com",
+                            EmailConfirmed = true,
+                            FirstName = "Harvey",
+                            LastName = "Updyke",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "HARVEY@HARVEY.COM",
+                            NormalizedUserName = "HARVEY@HARVEY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPccWIzJshV+NvEa0vHqxwIFIDq8OFTcEnMl2UrLf7XduLKZDW36Z3N3X9r8d5K5jw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
+                            TwoFactorEnabled = false,
+                            UserName = "harvey@harvey.com"
+                        },
+                        new
+                        {
+                            Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a9798732-128b-4840-941f-0bd476ddc01a",
+                            Email = "johnny@johnny.com",
+                            EmailConfirmed = true,
+                            FirstName = "Johnny",
+                            LastName = "Majors",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHNNY@JOHNNY.COM",
+                            NormalizedUserName = "JOHNNY@JOHNNY.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOXTBn1MSrECXbMWM/LZR769DDitqKd9BwtdXElmE5Ht0UJE32B2WOtjMDuaGN/HmA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
+                            TwoFactorEnabled = false,
+                            UserName = "johnny@johnny.com"
+                        });
+                });
+
             modelBuilder.Entity("IWasThere.Models.Game", b =>
                 {
                     b.Property<int>("GameId")
@@ -28,8 +157,8 @@ namespace IWasThere.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AwayScore")
-                        .HasColumnType("int");
+                    b.Property<float>("AwayScore")
+                        .HasColumnType("real");
 
                     b.Property<int>("AwayTeamId")
                         .HasColumnType("int");
@@ -40,16 +169,13 @@ namespace IWasThere.Migrations
                     b.Property<string>("GameName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HomeScore")
-                        .HasColumnType("int");
+                    b.Property<float>("HomeScore")
+                        .HasColumnType("real");
 
                     b.Property<int>("HomeTeamId")
                         .HasColumnType("int");
 
                     b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -64,8 +190,6 @@ namespace IWasThere.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("TeamId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Game");
@@ -78,9 +202,6 @@ namespace IWasThere.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -91,11 +212,11 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LocationId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Location");
                 });
@@ -106,6 +227,9 @@ namespace IWasThere.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(max)");
@@ -118,6 +242,8 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TeamId");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("UserId");
 
@@ -199,77 +325,6 @@ namespace IWasThere.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -356,31 +411,16 @@ namespace IWasThere.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("IWasThere.Models.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
             modelBuilder.Entity("IWasThere.Models.Game", b =>
                 {
                     b.HasOne("IWasThere.Models.Team", "AwayTeam")
-                        .WithMany()
+                        .WithMany("AwayGames")
                         .HasForeignKey("AwayTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IWasThere.Models.Team", "HomeTeam")
-                        .WithMany()
+                        .WithMany("HomeGames")
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -391,32 +431,30 @@ namespace IWasThere.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IWasThere.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Games")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("IWasThere.Models.Location", b =>
                 {
-                    b.HasOne("IWasThere.Models.ApplicationUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Locations")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>
                 {
+                    b.HasOne("IWasThere.Models.Game", null)
+                        .WithMany("Teams")
+                        .HasForeignKey("GameId");
+
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Teams")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -438,7 +476,7 @@ namespace IWasThere.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,7 +485,7 @@ namespace IWasThere.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -462,7 +500,7 @@ namespace IWasThere.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -471,7 +509,7 @@ namespace IWasThere.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("IWasThere.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

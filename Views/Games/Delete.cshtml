@@ -24,23 +24,17 @@
             @Html.DisplayFor(model => model.Date)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User)
+            @Html.DisplayNameFor(model => model.Location)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Id)
+            @Html.DisplayFor(model => model.Location.StadiumName)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LocationId)
+            @Html.DisplayNameFor(model => model.HomeTeam)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LocationId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HomeTeamId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HomeTeamId)
-        </dd>
+            @Html.DisplayFor(model => model.HomeTeam.TeamName)
+        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.HomeScore)
         </dt>
@@ -48,11 +42,11 @@
             @Html.DisplayFor(model => model.HomeScore)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AwayTeamId)
+            @Html.DisplayNameFor(model => model.AwayTeam)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AwayTeamId)
-        </dd>
+            @Html.DisplayFor(model => model.AwayTeam.TeamName)
+        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.AwayScore)
         </dt>

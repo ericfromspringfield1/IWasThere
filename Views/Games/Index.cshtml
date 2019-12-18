@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<IWasThere.Models.Game>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "My Games";
 }
 
 <h1>Index</h1>
@@ -19,19 +19,16 @@
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                @Html.DisplayNameFor(model => model.Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LocationId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomeTeamId)
+                @Html.DisplayNameFor(model => model.HomeTeam)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.HomeScore)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AwayTeamId)
+                @Html.DisplayNameFor(model => model.AwayTeam)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AwayScore)
@@ -46,22 +43,19 @@
                 @Html.DisplayFor(modelItem => item.GameName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.Date) 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.Location.StadiumName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LocationId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomeTeamId)
+                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeScore)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AwayTeamId)
+                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AwayScore)

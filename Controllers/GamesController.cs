@@ -16,7 +16,6 @@ namespace IWasThere.Controllers
     public class GamesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         private readonly UserManager<ApplicationUser> _userManager;
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
@@ -29,23 +28,14 @@ namespace IWasThere.Controllers
         // GET: Games
         public async Task<IActionResult> Index()
         {
-            /* var applicationDbContext = _context.Game
-                  .Include(g => g.Location)
-                  .Include(g => g.HomeTeam)
-                  .Include(g => g.HomeScore)
-                  .Include(g => g.AwayTeam)
-                  .Include(g=> g.AwayScore)
-                  .Include(g => g.User);
-              return View(await applicationDbContext.ToListAsync()); */
+            var user = await GetCurrentUserAsync();
+            var games = _context.Game
+                .Include(g => g.HomeTeam)
+                .Include(g => g.AwayTeam)
+                .Include(g => g.Location)
+                .Where(g => g.UserId == user.Id);
 
-            // The code below resticts the results to the current user
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            var applicationDbContext = _context.Game
-                                                        .Include(g => g.HomeTeam)
-                                                        .Include(g => g.AwayTeam)
-                                                        .Where(g => g.Team.UserId == user.Id);
-
-            return View(await applicationDbContext.ToListAsync());
+            return View(await games.ToListAsync());
         }
 
         // GET: Games/Details/5
@@ -56,10 +46,12 @@ namespace IWasThere.Controllers
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
             var game = await _context.Game
-                .Include(g => g.User)
+                .Include(g => g.Location)
                 .Include(g => g.HomeTeam)
                 .Include(g => g.AwayTeam)
+                .Where(g => g.UserId == user.Id)
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
@@ -70,13 +62,19 @@ namespace IWasThere.Controllers
         }
 
         // GET: Games/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Id");
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "HomeTeamId", "Id");
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "AwayTeamId", "Id");
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            return View();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var viewModel = new GameCreateViewModel()
+            {
+
+                Teams = await _context.Team
+                .Where(t => t.UserId == user.Id).ToListAsync(),
+
+                Locations = await _context.Location
+                .Where(l => l.UserId == user.Id).ToListAsync()
+            };
+            return View(viewModel);
         }
 
         // POST: Games/Create
@@ -86,19 +84,21 @@ namespace IWasThere.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GameCreateViewModel viewModel)
         {
+            ModelState.Remove("Game.UserId");
+            if (ModelState.IsValid)
             {
-                ModelState.Remove("Game.UserId");
-                if (ModelState.IsValid)
-                {
-                    var user = await _userManager.GetUserAsync(HttpContext.User);
-                    viewModel.Game.UserId = user.Id;
-                    _context.Add(viewModel.Game);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(viewModel);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                viewModel.Game.UserId = user.Id;
+                _context.Add(viewModel.Game);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
+
+
+            return View(viewModel);
+
         }
+
 
         // GET: Games/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -108,39 +108,45 @@ namespace IWasThere.Controllers
                 return NotFound();
             }
 
-            var game = await _context.Game.FindAsync(id);
+            var user = await GetCurrentUserAsync();
+            var game = await _context.Game
+                .Include(g => g.Location)
+                .Include(g => g.Teams)
+                .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
                 return NotFound();
             }
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Id");
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "Id", "HomeTeam", game.HomeTeamId);
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "Id", "AwayTeam", game.AwayTeamId);
 
+        ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.HomeTeamId);
+        ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.AwayTeamId);
+        ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
+       
             return View(game);
         }
-    
+
 
         // POST: Games/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,UserId,HomeTeamId,AwayTeamId,HomeScore,AwayScore")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] Game game)
         {
             if (id != game.GameId)
             {
                 return NotFound();
             }
 
+            var user = await GetCurrentUserAsync();
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var user = await _userManager.GetUserAsync(HttpContext.User);
                     game.UserId = user.Id;
                     _context.Update(game);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -153,13 +159,18 @@ namespace IWasThere.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "Id");
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "Id", "HomeTeam", game.HomeTeamId);
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "Id", "AwayTeam", game.AwayTeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.HomeTeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.AwayTeamId);
+            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
         }
+
+
+
+
+
 
         // GET: Games/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -170,7 +181,10 @@ namespace IWasThere.Controllers
             }
 
             var game = await _context.Game
-                .Include(g => g.Team)
+                .Include(g => g.HomeTeam)
+                .Include(g => g.AwayTeam)
+                .Include(g => g.Location)
+                .Include(g => g.User)
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
