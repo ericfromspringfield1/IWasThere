@@ -30,8 +30,8 @@ namespace IWasThere.Controllers
         {
             var user = await GetCurrentUserAsync();
             var games = _context.Game
-                .Include(g => g.Team)
-                .Include(g => g.Team)
+                .Include(g => g.HomeTeam)
+                .Include(g => g.AwayTeam)
                 .Include(g => g.Location)
                 .Where(g => g.UserId == user.Id);
 
@@ -48,10 +48,10 @@ namespace IWasThere.Controllers
 
             var user = await GetCurrentUserAsync();
             var game = await _context.Game
-                .Include(g => g.AwayTeam)
-                .Include(g => g.AwayScore)
                 .Include(g => g.HomeTeam)
                 .Include(g => g.HomeScore)
+                .Include(g => g.AwayTeam)
+                .Include(g => g.AwayScore)
                 .Include(g => g.Location)
                 .Include(g => g.UserId)
                 .Where(g => g.UserId == user.Id)
@@ -96,10 +96,7 @@ namespace IWasThere.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            ViewData["HomeTeamId"] = new SelectList(_context.Game, "HomeTeamId", "UserId", viewModel.HomeTeamId);
-            ViewData["AwayTeamId"] = new SelectList(_context.Game, "AwayTeamId", "UserId", viewModel.AwayTeamId);
-            ViewData["LocationId"] = new SelectList(_context.Game, "LocationId", "LocationId", viewModel.LocationId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", viewModel.UserId); 
+           
             return View(viewModel);
 
         }
@@ -118,8 +115,8 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.TeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.TeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Team, "HomeTeamId", "TeamName", game.HomeTeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Team, "AwayTeamId", "TeamName", game.AwayTeamId);
             ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
@@ -161,8 +158,8 @@ namespace IWasThere.Controllers
                     }
                 }
             }
-            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.AwayTeamId);
-            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.HomeTeamId);
+            ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "HomeTeamName", game.HomeTeamId);
+            ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "AwayTeamName", game.AwayTeamId);
             ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
@@ -180,7 +177,6 @@ namespace IWasThere.Controllers
                 .Include(g => g.AwayTeam)
                 .Include(g => g.HomeTeam)
                 .Include(g => g.Location)
-                .Include(g => g.Team)
                 .Include(g => g.User)
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)

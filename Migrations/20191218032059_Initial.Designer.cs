@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWasThere.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191216201458_initial")]
-    partial class initial
+    [Migration("20191218032059_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,7 +98,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8dbeb633-be35-40e2-98fb-5f2b849af9ff",
+                            ConcurrencyStamp = "133a3389-a7f1-44fe-9e1d-3fca610fe9d5",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -106,7 +106,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGVendN+utSkNabNnSlJ5Q9XVgK7HwMrepx4C8aEV3EZpQmO/xDm/LwOFYW2tuyliw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAED0It0IbIo+OviK72L/aVvrCga84yuIrjCYzuqGSyEdJQ6dRYzue0NBFPOpsUpY3tA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -116,7 +116,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cb4ee6a2-ffe0-4f01-af14-0744a7cf18e2",
+                            ConcurrencyStamp = "5695900a-c18e-436b-9a9e-f27af94aa7b1",
                             Email = "harvey@harvey.com",
                             EmailConfirmed = true,
                             FirstName = "Harvey",
@@ -124,7 +124,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HARVEY@HARVEY.COM",
                             NormalizedUserName = "HARVEY@HARVEY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFkbCUxS/XE4nCXJ9WBTq17+s5DU5A5R4WYrB7eTOlekppOdCECXsTx+sSs2ePou3Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPccWIzJshV+NvEa0vHqxwIFIDq8OFTcEnMl2UrLf7XduLKZDW36Z3N3X9r8d5K5jw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
                             TwoFactorEnabled = false,
@@ -134,7 +134,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d685d325-a6be-4355-8077-5dd3ee1cb744",
+                            ConcurrencyStamp = "a9798732-128b-4840-941f-0bd476ddc01a",
                             Email = "johnny@johnny.com",
                             EmailConfirmed = true,
                             FirstName = "Johnny",
@@ -142,7 +142,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNNY@JOHNNY.COM",
                             NormalizedUserName = "JOHNNY@JOHNNY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIgXUu5e8WWbkWfvwanC4Wo+bF4FqhRZUPqJlLul//zHF/PJHEscANjL+hx5D7Yu+g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOXTBn1MSrECXbMWM/LZR769DDitqKd9BwtdXElmE5Ht0UJE32B2WOtjMDuaGN/HmA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
                             TwoFactorEnabled = false,
@@ -157,8 +157,8 @@ namespace IWasThere.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AwayScore")
-                        .HasColumnType("int");
+                    b.Property<float>("AwayScore")
+                        .HasColumnType("real");
 
                     b.Property<int>("AwayTeamId")
                         .HasColumnType("int");
@@ -169,16 +169,13 @@ namespace IWasThere.Migrations
                     b.Property<string>("GameName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HomeScore")
-                        .HasColumnType("int");
+                    b.Property<float>("HomeScore")
+                        .HasColumnType("real");
 
                     b.Property<int>("HomeTeamId")
                         .HasColumnType("int");
 
                     b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -192,8 +189,6 @@ namespace IWasThere.Migrations
                     b.HasIndex("HomeTeamId");
 
                     b.HasIndex("LocationId");
-
-                    b.HasIndex("TeamId");
 
                     b.HasIndex("UserId");
 
@@ -233,6 +228,9 @@ namespace IWasThere.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(max)");
 
@@ -244,6 +242,8 @@ namespace IWasThere.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TeamId");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("UserId");
 
@@ -414,13 +414,13 @@ namespace IWasThere.Migrations
             modelBuilder.Entity("IWasThere.Models.Game", b =>
                 {
                     b.HasOne("IWasThere.Models.Team", "AwayTeam")
-                        .WithMany()
+                        .WithMany("AwayGames")
                         .HasForeignKey("AwayTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IWasThere.Models.Team", "HomeTeam")
-                        .WithMany()
+                        .WithMany("HomeGames")
                         .HasForeignKey("HomeTeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -430,10 +430,6 @@ namespace IWasThere.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("IWasThere.Models.Team", "Team")
-                        .WithMany()
-                        .HasForeignKey("TeamId");
 
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Games")
@@ -451,6 +447,10 @@ namespace IWasThere.Migrations
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>
                 {
+                    b.HasOne("IWasThere.Models.Game", null)
+                        .WithMany("Teams")
+                        .HasForeignKey("GameId");
+
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Teams")
                         .HasForeignKey("UserId")

@@ -12,17 +12,14 @@ namespace IWasThere.Models
     public class GameCreateViewModel
     {
         public Game Game { get; set; }
-        
         public int GameId { get; set; }
-        public List<Team> Teams { get; set; }
-        public int HomeTeamId { get; set; }
-        public int AwayTeamId { get; set; }
+        public virtual ICollection<Team> Teams { get; set; } 
         public List<Location> Locations { get; set; }
-        public int LocationId { get; set; }
+        public Location LocationId { get; set; }
         public string UserId { get; set; }
 
         
-        public List<SelectListItem> HomeTeamOptions 
+        public virtual ICollection<SelectListItem> HomeTeamOptions 
         {
             get
             {
@@ -32,7 +29,7 @@ namespace IWasThere.Models
 
         }
         
-        public List<SelectListItem> AwayTeamOptions
+        public virtual ICollection<SelectListItem> AwayTeamOptions
         { 
             get
             {
@@ -41,7 +38,7 @@ namespace IWasThere.Models
             }
 
         }
-        public List<SelectListItem> LocationOptions
+        public List<SelectListItem> LocationOptions 
         {
             get
             {
