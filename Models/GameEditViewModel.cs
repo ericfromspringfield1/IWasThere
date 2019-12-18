@@ -2,26 +2,22 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace IWasThere.Models
 {
     [Authorize]
-    public class GameCreateViewModel
+    public class GameEditViewModel
     {
         public Game Game { get; set; }
-        public int GameId { get; set; } 
+        public int GameId { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
-        public virtual Team AwayTeam { get; set; }
-        public virtual Team HomeTeam { get; set; }
         public List<Location> Locations { get; set; }
-        public Location LocationId { get; set; }
-        public string UserId { get; set; }
-
         
-        public virtual ICollection<SelectListItem> HomeTeamOptions 
+
+
+        public virtual ICollection<SelectListItem> HomeTeamOptions
         {
             get
             {
@@ -30,9 +26,9 @@ namespace IWasThere.Models
             }
 
         }
-        
+
         public virtual ICollection<SelectListItem> AwayTeamOptions
-        { 
+        {
             get
             {
                 return Teams?.Select(t => new SelectListItem(t.TeamName, t.TeamId.ToString())).ToList();
@@ -40,7 +36,7 @@ namespace IWasThere.Models
             }
 
         }
-        public List<SelectListItem> LocationOptions 
+        public List<SelectListItem> LocationOptions
         {
             get
             {

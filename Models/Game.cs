@@ -25,8 +25,8 @@ namespace IWasThere.Models
         public int LocationId { get; set; }
         public Location Location { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
-        public virtual Team AwayTeam { get; set; }
         public virtual Team HomeTeam { get; set; }
+        public virtual Team AwayTeam { get; set; }
         public float HomeScore { get; set; }
         public float AwayScore { get; set; }
 

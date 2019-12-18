@@ -12,7 +12,7 @@ namespace IWasThere.Models
         public int TeamId { get; set; }
         public string TeamName { get; set; }
         public string Nickname { get; set; }
-        public virtual ICollection<Game> HomeGames { get; set; }
+        public virtual ICollection<Game> HomeGames { get; set; } 
         public virtual ICollection<Game> AwayGames { get; set; }
         [Required]
         public string UserId { get; set; }
