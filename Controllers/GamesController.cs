@@ -112,7 +112,6 @@ namespace IWasThere.Controllers
             var game = await _context.Game
                 .Include(g => g.Location)
                 .Include(g => g.Teams)
-                .Include(g => g.Teams)
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
@@ -125,32 +124,6 @@ namespace IWasThere.Controllers
        
             return View(game);
         }
-
-    
-
-
-
-        /*public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var game = await _context.Game
-                .Include(g => g.Location)
-                .Include(g => g.HomeTeam)
-                .Include(g => g.AwayTeam)
-                .FirstOrDefaultAsync(m => m.GameId == id);
-            if (game == null)
-            {
-                return NotFound();
-            }
-            ViewData["LocationId"] = new SelectList(_context.ApplicationUsers, "LocationId", "StadiumGame", game.LocationId);
-            ViewData["HomeTeamId"] = new SelectList(_context.ApplicationUsers, "HomeTeamId", "TeamName", game.GameId);
-            ViewData["AwayTeamId"] = new SelectList(_context.ApplicationUsers, "AwayTeamId", "TeamName", game.GameId);
-            return View(game);
-        }*/
 
 
         // POST: Games/Edit/5
@@ -198,27 +171,6 @@ namespace IWasThere.Controllers
 
 
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(GameEditViewModel editViewModel)
-        {
-            ModelState.Remove("Game.UserId");
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(HttpContext.User);
-                editViewModel.Game.UserId = user.Id;
-                _context.Add(editViewModel.Game);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-
-            return View(editViewModel);
-
-        }*/
-
 
         // GET: Games/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -229,8 +181,8 @@ namespace IWasThere.Controllers
             }
 
             var game = await _context.Game
-                .Include(g => g.AwayTeam)
                 .Include(g => g.HomeTeam)
+                .Include(g => g.AwayTeam)
                 .Include(g => g.Location)
                 .Include(g => g.User)
                 .FirstOrDefaultAsync(m => m.GameId == id);

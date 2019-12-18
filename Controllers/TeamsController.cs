@@ -105,23 +105,22 @@ namespace IWasThere.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("HomeTeamId,TeamName,Nickname,UserId")] Team team)
+        public async Task<IActionResult> Edit(int id, [Bind("TeamId,TeamName,Nickname,UserId")] Team team)
         {
             if (id != team.TeamId)
             {
                 return NotFound();
             }
-            var user = await GetCurrentUserAsync();
-            ModelState.Remove("User");
+            
             ModelState.Remove("UserId");
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var user = await _userManager.GetUserAsync(HttpContext.User);
                     team.UserId = user.Id;
                     _context.Update(team);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -134,6 +133,7 @@ namespace IWasThere.Controllers
                         throw;
                     }
                 }
+                    return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.UserId);
             return View(team);
