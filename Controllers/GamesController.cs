@@ -73,6 +73,7 @@ namespace IWasThere.Controllers
 
                 Teams = await _context.Team
                 .Where(t => t.UserId == user.Id).ToListAsync(),
+                
                 Locations = await _context.Location
                 .Where(l => l.UserId == user.Id).ToListAsync()
             };
