@@ -103,27 +103,34 @@ namespace IWasThere.Controllers
         // GET: Games/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await GetCurrentUserAsync();
             var game = await _context.Game
                 .Include(g => g.Location)
-                .Include(g => g.Teams)
-                .FirstOrDefaultAsync(m => m.GameId == id);
+                .Include(g => g.HomeTeam)
+                .Include(g => g.AwayTeam)
+                .FirstOrDefaultAsync(g => g.GameId == id);
             if (game == null)
             {
                 return NotFound();
             }
+            var locationSelectItems = await _context.Location.Where(l => l.UserId == user.Id).ToListAsync();
+            var teamSelectItems = await _context.Team.Where(t => t.UserId == user.Id).ToListAsync();
+            
 
-        ViewData["HomeTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.HomeTeamId);
-        ViewData["AwayTeamId"] = new SelectList(_context.Team, "TeamId", "TeamName", game.AwayTeamId);
-        ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "StadiumName", game.LocationId);
-       
-            return View(game);
+            ViewData["HomeTeamId"] = new SelectList(teamSelectItems, "TeamId", "TeamName", game.HomeTeamId);
+            ViewData["AwayTeamId"] = new SelectList(teamSelectItems, "TeamId", "TeamName", game.AwayTeamId);
+            ViewData["LocationId"] = new SelectList(locationSelectItems, "LocationId", "StadiumName", game.LocationId);
+            
+                return View(game);
+            
         }
+
+
 
 
         // POST: Games/Edit/5
@@ -190,7 +197,8 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-
+            
+          
             return View(game);
         }
 

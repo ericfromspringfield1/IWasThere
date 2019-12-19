@@ -146,16 +146,30 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-
             var team = await _context.Team
                 .Include(t => t.User)
+                .Include(t => t.HomeGames)
+                .Include(t => t.AwayGames)
                 .FirstOrDefaultAsync(m => m.TeamId == id);
             if (team == null)
             {
                 return NotFound();
             }
 
+
+            if (team.HomeGames.Count() == 0 )                
+            {
             return View(team);
+            }
+
+            if (team.AwayGames.Count() == 0)
+
+            {
+                return View(team);
+            }
+
+            return Content("This Team has a relationship to a Game and cannot be deleted.");
+
         }
 
         // POST: Teams/Delete/5
