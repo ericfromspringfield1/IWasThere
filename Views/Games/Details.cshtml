@@ -4,10 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+    <h1>@Html.DisplayFor(model => model.GameName)</h1>
 
 <div>
-    <h4>Game</h4>
+    <h4>@Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore) vs. @Html.DisplayFor(model => model.AwayTeam.TeamName)@Html.DisplayFor(model => model.AwayScore)</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
