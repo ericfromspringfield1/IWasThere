@@ -44,6 +44,11 @@ namespace IWasThere.Data
                 .WithOne(t => t.User)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<ApplicationUser>()
+               .HasMany(u => u.Locations)
+               .WithOne(t => t.User)
+               .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<Game>()
                     .HasOne(g => g.HomeTeam)
                     .WithMany(t => t.HomeGames)
@@ -55,6 +60,12 @@ namespace IWasThere.Data
                     .WithMany(t => t.AwayGames)
                     .HasForeignKey(g => g.AwayTeamId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+           /* modelBuilder.Entity<Game>()
+                    .HasOne(g => g.Location)
+                    .WithMany(l => l.HomeGames)
+                    .HasForeignKey(g => g.HomeTeamId)
+                    .OnDelete(DeleteBehavior.Restrict);*/
 
 
 

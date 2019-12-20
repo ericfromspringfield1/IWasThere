@@ -96,7 +96,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "133a3389-a7f1-44fe-9e1d-3fca610fe9d5",
+                            ConcurrencyStamp = "4cb16eac-7096-44ca-86ff-0f7a09e34f4f",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -104,7 +104,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED0It0IbIo+OviK72L/aVvrCga84yuIrjCYzuqGSyEdJQ6dRYzue0NBFPOpsUpY3tA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHUY3PDo1i9wtyKypLum8lBMuRQ7yEHaUlITG59MrKmmnS5yEl9NiOUeZE/fgG4tfw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -114,7 +114,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5695900a-c18e-436b-9a9e-f27af94aa7b1",
+                            ConcurrencyStamp = "3345a209-f10d-41b0-aae3-7a236733db6c",
                             Email = "harvey@harvey.com",
                             EmailConfirmed = true,
                             FirstName = "Harvey",
@@ -122,7 +122,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HARVEY@HARVEY.COM",
                             NormalizedUserName = "HARVEY@HARVEY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPccWIzJshV+NvEa0vHqxwIFIDq8OFTcEnMl2UrLf7XduLKZDW36Z3N3X9r8d5K5jw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKQ1q8CpKcoqRyT4OyDYNTXiEp/QT8udo5WE5NlNOIQ+ETIVDbF4s0y2WzWajwtdQg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
                             TwoFactorEnabled = false,
@@ -132,7 +132,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a9798732-128b-4840-941f-0bd476ddc01a",
+                            ConcurrencyStamp = "175823a3-a0e2-4343-97c5-51d0847bc825",
                             Email = "johnny@johnny.com",
                             EmailConfirmed = true,
                             FirstName = "Johnny",
@@ -140,7 +140,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNNY@JOHNNY.COM",
                             NormalizedUserName = "JOHNNY@JOHNNY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOXTBn1MSrECXbMWM/LZR769DDitqKd9BwtdXElmE5Ht0UJE32B2WOtjMDuaGN/HmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECnqFWY9HzGVkqpxTy1Yi7YGeBwHzwUunBMVZLsZqGvB8vfSSwPOg+0zG1byjPz8MA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
                             TwoFactorEnabled = false,
@@ -185,8 +185,6 @@ namespace IWasThere.Migrations
                     b.HasIndex("AwayTeamId");
 
                     b.HasIndex("HomeTeamId");
-
-                    b.HasIndex("LocationId");
 
                     b.HasIndex("UserId");
 
@@ -414,19 +412,19 @@ namespace IWasThere.Migrations
                     b.HasOne("IWasThere.Models.Team", "AwayTeam")
                         .WithMany("AwayGames")
                         .HasForeignKey("AwayTeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IWasThere.Models.Location", "Location")
+                        .WithMany("HomeGames")
+                        .HasForeignKey("HomeTeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("IWasThere.Models.Team", "HomeTeam")
                         .WithMany("HomeGames")
                         .HasForeignKey("HomeTeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IWasThere.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
@@ -440,7 +438,8 @@ namespace IWasThere.Migrations
                 {
                     b.HasOne("IWasThere.Models.ApplicationUser", "User")
                         .WithMany("Locations")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("IWasThere.Models.Team", b =>

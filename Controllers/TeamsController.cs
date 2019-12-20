@@ -38,7 +38,7 @@ namespace IWasThere.Controllers
 
         // GET: Teams/Details/5
         public async Task<IActionResult> Details(int? id)
-        { 
+        {
             if (id == null)
             {
                 return NotFound();
@@ -58,7 +58,6 @@ namespace IWasThere.Controllers
         // GET: Teams/Create
         public IActionResult Create()
         {
-            //ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
 
@@ -111,7 +110,7 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-            
+
             ModelState.Remove("UserId");
             if (ModelState.IsValid)
             {
@@ -133,7 +132,7 @@ namespace IWasThere.Controllers
                         throw;
                     }
                 }
-                    return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", team.UserId);
             return View(team);
@@ -146,31 +145,27 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
+
             var team = await _context.Team
                 .Include(t => t.User)
                 .Include(t => t.HomeGames)
                 .Include(t => t.AwayGames)
                 .FirstOrDefaultAsync(m => m.TeamId == id);
+
+
             if (team == null)
             {
                 return NotFound();
             }
 
-
-            if (team.HomeGames.Count() == 0 )                
-            {
             return View(team);
-            }
-
-            if (team.AwayGames.Count() == 0)
-
-            {
-                return View(team);
-            }
-
-            return Content("This Team has a relationship to a Game and cannot be deleted.");
-
         }
+    
+        
+    
+
+
+    
 
         // POST: Teams/Delete/5
         [HttpPost, ActionName("Delete")]

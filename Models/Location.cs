@@ -8,7 +8,7 @@ namespace IWasThere.Models
         [Key]
         public int LocationId { get; set; }
         public string StadiumName { get; set; }
-        public int GameId { get; set; }
+        public virtual ICollection<Game> HomeGames { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string UserId { get; set; }

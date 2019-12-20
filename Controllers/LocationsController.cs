@@ -147,22 +147,21 @@ namespace IWasThere.Controllers
 
             var location = await _context.Location
                 .Include(l => l.User)
-                .Include(l => l.GameId)
+                .Include(l => l.HomeGames)
                 .FirstOrDefaultAsync(m => m.LocationId == id);
-
+            
             
             if (location == null)
             {
                 return NotFound();
             }
 
-            if (location.GameId == 0)
+            if (location.HomeGames.Count() == 0)
             {
                 return View(location);
             }
 
-
-            return View(location);
+            return Content("This Stadium/Location has a relationship to a Game and cannot be deleted.");
 
         }
 
