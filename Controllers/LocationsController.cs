@@ -155,14 +155,8 @@ namespace IWasThere.Controllers
             {
                 return NotFound();
             }
-
-            if (location.HomeGames.Count() == 0)
-            {
-                return View(location);
-            }
-
-            return Content("This Stadium/Location has a relationship to a Game and cannot be deleted.");
-
+            return View(location);
+           
         }
 
         // POST: Locations/Delete/5

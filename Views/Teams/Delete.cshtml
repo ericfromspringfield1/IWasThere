@@ -7,15 +7,15 @@
     @if (Model.HomeGames.Count() > 0 || Model.AwayGames.Count() > 0)
     {
         <h1>Not So Fast My Friend</h1>
+        <hr />
         <h4>
             @Model.TeamName is currently associated with  @Model.HomeGames.Count() home game(s) and @Model.AwayGames.Count() away game(s).A team associated
             with a game cannot be deleted.
         </h4>
 
-        <form asp-action="Delete">
+        <form asp-action="Index">
             <input type="hidden" asp-for="TeamId" />
-            <input type="hidden" value="Delete" class="btn btn-danger" />
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Back To Teams List" class="btn btn-danger" />
         </form>
     }
 
@@ -51,6 +51,6 @@
                 <a asp-action="Index">Back to List</a>
             </form>
         </div>
-        }
     }
+}
 

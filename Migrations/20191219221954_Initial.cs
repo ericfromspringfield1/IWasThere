@@ -216,11 +216,7 @@ namespace IWasThere.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Game", x => x.GameId);
-                    table.ForeignKey(
-                        name: "FK_Game_Location_HomeTeamId",
-                        column: x => x.HomeTeamId,
-                        principalTable: "Location",
-                        principalColumn: "LocationId");
+                    
                         
                     table.ForeignKey(
                         name: "FK_Game_AspNetUsers_UserId",
