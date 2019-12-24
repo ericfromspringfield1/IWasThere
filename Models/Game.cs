@@ -16,18 +16,33 @@ namespace IWasThere.Models
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
+        [Display(Name = "Home Team")]
         public int HomeTeamId { get; set; }
+
+        [Display(Name = "Away Team")]
         public int AwayTeamId { get; set; }
 
         [Required]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
+
+        [Display(Name = "Stadium")]
         public int LocationId { get; set; }
+
+        [Display(Name = "Stadium")]
         public Location Location { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
+
+        [Display(Name = "Home Team")]
         public virtual Team HomeTeam { get; set; }
+
+        [Display(Name = "Away Team")]
         public virtual Team AwayTeam { get; set; }
+
+        [Display(Name = "Home Score")]
         public float HomeScore { get; set; }
+
+        [Display(Name = "Away Score")]
         public float AwayScore { get; set; }
 
           
