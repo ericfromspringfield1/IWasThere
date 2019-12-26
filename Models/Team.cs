@@ -10,7 +10,11 @@ namespace IWasThere.Models
     {
         [Key]
         public int TeamId { get; set; }
+
+        [Display(Name = "Team Name")]
         public string TeamName { get; set; }
+
+        [Display(Name = "Team Nickname")]
         public string Nickname { get; set; }
         public virtual ICollection<Game> HomeGames { get; set; } 
         public virtual ICollection<Game> AwayGames { get; set; }

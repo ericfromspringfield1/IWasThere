@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IWasThere.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,13 +211,18 @@ namespace IWasThere.Migrations
                     UserId = table.Column<string>(nullable: false),
                     LocationId = table.Column<int>(nullable: false),
                     HomeScore = table.Column<float>(nullable: false),
-                    AwayScore = table.Column<float>(nullable: false)
+                    AwayScore = table.Column<float>(nullable: false),
+                    Notes = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Game", x => x.GameId);
-                    
-                        
+                    table.ForeignKey(
+                        name: "FK_Game_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Game_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -257,17 +262,17 @@ namespace IWasThere.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "4cb16eac-7096-44ca-86ff-0f7a09e34f4f", "admin@admin.com", true, "Admina", "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEHUY3PDo1i9wtyKypLum8lBMuRQ7yEHaUlITG59MrKmmnS5yEl9NiOUeZE/fgG4tfw==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "f35c0817-422a-4d26-a28d-89aeafb0cf56", "admin@admin.com", true, "Admina", "Straytor", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEHuK1cDsXpaM2gggkUulUQZbsStpOUg1rRFG0OVGqmWbjF08wzfbfDQ6dWPEYSUweQ==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff1", 0, "3345a209-f10d-41b0-aae3-7a236733db6c", "harvey@harvey.com", true, "Harvey", "Updyke", false, null, "HARVEY@HARVEY.COM", "HARVEY@HARVEY.COM", "AQAAAAEAACcQAAAAEKQ1q8CpKcoqRyT4OyDYNTXiEp/QT8udo5WE5NlNOIQ+ETIVDbF4s0y2WzWajwtdQg==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794578", false, "harvey@harvey.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff1", 0, "fb3c05e1-c9bb-4cbf-9eac-a9e4a53cd5ba", "harvey@harvey.com", true, "Harvey", "Updyke", false, null, "HARVEY@HARVEY.COM", "HARVEY@HARVEY.COM", "AQAAAAEAACcQAAAAEEh9Df52R9scRInIQIh7jUX0JBJGwkVp1jdK6IZFeYkQsVw5A24W1/vpOn+NSUn/Nw==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794578", false, "harvey@harvey.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff2", 0, "175823a3-a0e2-4343-97c5-51d0847bc825", "johnny@johnny.com", true, "Johnny", "Majors", false, null, "JOHNNY@JOHNNY.COM", "JOHNNY@JOHNNY.COM", "AQAAAAEAACcQAAAAECnqFWY9HzGVkqpxTy1Yi7YGeBwHzwUunBMVZLsZqGvB8vfSSwPOg+0zG1byjPz8MA==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794590", false, "johnny@johnny.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff2", 0, "eaab4d86-9735-46ed-bc39-685e4346d525", "johnny@johnny.com", true, "Johnny", "Majors", false, null, "JOHNNY@JOHNNY.COM", "JOHNNY@JOHNNY.COM", "AQAAAAEAACcQAAAAEJYUNtY6KK5RXXkPBUz6SPhso3UqYGKPJs4KGNgr4Tix0acpNdGTbxoV3U4NRj0USg==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794590", false, "johnny@johnny.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -317,6 +322,11 @@ namespace IWasThere.Migrations
                 name: "IX_Game_HomeTeamId",
                 table: "Game",
                 column: "HomeTeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Game_LocationId",
+                table: "Game",
+                column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Game_UserId",

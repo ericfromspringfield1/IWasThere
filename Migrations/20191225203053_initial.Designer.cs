@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IWasThere.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191220200943_LocationFK")]
-    partial class LocationFK
+    [Migration("20191225203053_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,7 +98,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bb08bd20-ae46-44f7-944e-53bd14250a29",
+                            ConcurrencyStamp = "f35c0817-422a-4d26-a28d-89aeafb0cf56",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -106,7 +106,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGgWPWIx1+1gmECGiqaiVPm1OjNksAYWzcUIkLasZFgVSFtwON3Kohggz7vWAIf5Rw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHuK1cDsXpaM2gggkUulUQZbsStpOUg1rRFG0OVGqmWbjF08wzfbfDQ6dWPEYSUweQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -116,7 +116,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ce6449a4-baed-4586-80e4-7bc857359603",
+                            ConcurrencyStamp = "fb3c05e1-c9bb-4cbf-9eac-a9e4a53cd5ba",
                             Email = "harvey@harvey.com",
                             EmailConfirmed = true,
                             FirstName = "Harvey",
@@ -124,7 +124,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HARVEY@HARVEY.COM",
                             NormalizedUserName = "HARVEY@HARVEY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOgvDg6wq6k6dKIn1DQfju00vepAQ/+cJgQ6P6EgzT5kehvmT+Q+F74dLChHkABH0g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEh9Df52R9scRInIQIh7jUX0JBJGwkVp1jdK6IZFeYkQsVw5A24W1/vpOn+NSUn/Nw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
                             TwoFactorEnabled = false,
@@ -134,7 +134,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "486b5865-edee-4394-8780-480b92211531",
+                            ConcurrencyStamp = "eaab4d86-9735-46ed-bc39-685e4346d525",
                             Email = "johnny@johnny.com",
                             EmailConfirmed = true,
                             FirstName = "Johnny",
@@ -142,7 +142,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNNY@JOHNNY.COM",
                             NormalizedUserName = "JOHNNY@JOHNNY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJMFlyA+gLr8M49ol8izB3fBAKtmwMivHBkEY6+0YFsNAFghdlmxh09flQ46fmC7/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJYUNtY6KK5RXXkPBUz6SPhso3UqYGKPJs4KGNgr4Tix0acpNdGTbxoV3U4NRj0USg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
                             TwoFactorEnabled = false,
@@ -177,6 +177,9 @@ namespace IWasThere.Migrations
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()

@@ -11,6 +11,8 @@ namespace IWasThere.Models
     public class Game
     {
         public int GameId { get; set; }
+
+        [Display(Name = "Game Name")]
         public string GameName { get; set; }
 
         [DataType(DataType.Date)]
@@ -45,7 +47,12 @@ namespace IWasThere.Models
         [Display(Name = "Away Score")]
         public float AwayScore { get; set; }
 
-          
+        [Display(Name = "Memories From That Day")]
+        public string Notes { get; set; }
+
+
+
+
 
 
     }

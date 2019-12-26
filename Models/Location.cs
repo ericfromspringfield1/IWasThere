@@ -7,6 +7,8 @@ namespace IWasThere.Models
     {
         [Key]
         public int LocationId { get; set; }
+
+        [Display(Name = "Stadium Name")]
         public string StadiumName { get; set; }
         public virtual ICollection<Game> HomeGames { get; set; }
         public string City { get; set; }

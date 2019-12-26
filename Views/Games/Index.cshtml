@@ -4,7 +4,7 @@
     ViewData["Title"] = "My Games";
 }
 
-<h1>Index</h1>
+<h1>Games I've Attended</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -43,13 +43,15 @@
                 @Html.DisplayFor(modelItem => item.GameName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date) 
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location.StadiumName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
+                <a asp-action="Details" asp-route-id="@item.HomeTeam.TeamId">Details</a> |
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HomeScore)
@@ -65,6 +67,7 @@
                 <a asp-action="Details" asp-route-id="@item.GameId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.GameId">Delete</a>
             </td>
+            
         </tr>
 }
     </tbody>

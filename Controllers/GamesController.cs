@@ -128,12 +128,10 @@ namespace IWasThere.Controllers
         }
 
 
-
-
         // POST: Games/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] Game game)
+        public async Task<IActionResult> Edit(int id, [Bind("GameId,GameName,Date,Notes,UserId,LocationId,HomeTeamId,HomeScore,AwayTeamId,AwayScore")] Game game)
         {
             if (id != game.GameId)
             {
@@ -170,9 +168,6 @@ namespace IWasThere.Controllers
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", game.UserId);
             return View(game);
         }
-
-
-
 
 
 

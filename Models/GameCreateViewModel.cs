@@ -18,6 +18,7 @@ namespace IWasThere.Models
         public virtual Team HomeTeam { get; set; }
         public List<Location> Locations { get; set; }
         public Location LocationId { get; set; }
+        public string Notes { get; set; }
         public string UserId { get; set; }
 
         

@@ -12,6 +12,10 @@
 
         <div>
             <h4>@Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore) vs. @Html.DisplayFor(model => model.AwayTeam.TeamName) @Html.DisplayFor(model => model.AwayScore)</h4>
+                @if (Model.HomeTeam.TeamName == "Alabama")
+                {
+                     
+                }
             <hr />
             <dl class="row">
                 <dt class="col-sm-2">
@@ -55,6 +59,12 @@
                 </dt>
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.AwayScore)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Notes)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Notes)
                 </dd>
             </dl>
         </div>

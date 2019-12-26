@@ -23,7 +23,6 @@ namespace IWasThere.Data
         public DbSet<Team> HomeTeam { get; set; }
         public DbSet<Team> AwayTeam { get; set; }
         public DbSet<Location> Location { get; set; }
-        public DbSet<UserGame> UserGame { get; set; }
 
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)

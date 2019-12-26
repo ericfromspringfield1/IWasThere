@@ -96,7 +96,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cadbecf7-d258-4038-96b4-783878c3c2cc",
+                            ConcurrencyStamp = "f35c0817-422a-4d26-a28d-89aeafb0cf56",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Admina",
@@ -104,7 +104,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAED6Vr0EmBkRHsQd/3jRoLJOIhP27mu2aYTRMxgZs6qQ4tPXSzbsQ0F81LKPbGiJ04w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHuK1cDsXpaM2gggkUulUQZbsStpOUg1rRFG0OVGqmWbjF08wzfbfDQ6dWPEYSUweQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -114,7 +114,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2147de66-59f8-4741-89fa-734c8c9d7585",
+                            ConcurrencyStamp = "fb3c05e1-c9bb-4cbf-9eac-a9e4a53cd5ba",
                             Email = "harvey@harvey.com",
                             EmailConfirmed = true,
                             FirstName = "Harvey",
@@ -122,7 +122,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HARVEY@HARVEY.COM",
                             NormalizedUserName = "HARVEY@HARVEY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFeQx3b82mk+SzSWDqoRTnbg4sMUgzrLICocDV2ZVkr14Xmp7SqcOMOC9GNcnVa/8Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEh9Df52R9scRInIQIh7jUX0JBJGwkVp1jdK6IZFeYkQsVw5A24W1/vpOn+NSUn/Nw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794578",
                             TwoFactorEnabled = false,
@@ -132,7 +132,7 @@ namespace IWasThere.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1488feba-0a97-4271-98d1-4d107dcd74e5",
+                            ConcurrencyStamp = "eaab4d86-9735-46ed-bc39-685e4346d525",
                             Email = "johnny@johnny.com",
                             EmailConfirmed = true,
                             FirstName = "Johnny",
@@ -140,7 +140,7 @@ namespace IWasThere.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHNNY@JOHNNY.COM",
                             NormalizedUserName = "JOHNNY@JOHNNY.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMzS/ReA63yGi/+3VeqKnqtraStarTvr8iIeYq3FgjSy71xnrs7KtO/+pUYcqK5x1Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJYUNtY6KK5RXXkPBUz6SPhso3UqYGKPJs4KGNgr4Tix0acpNdGTbxoV3U4NRj0USg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794590",
                             TwoFactorEnabled = false,
@@ -175,6 +175,9 @@ namespace IWasThere.Migrations
 
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
