@@ -2,74 +2,121 @@
 
 @{
     ViewData["Title"] = "Details";
-   if (Model.HomeTeam.TeamName == "Alabama" || Model.AwayTeam.TeamName == "Alabama")
-     {
+    @*if (Model.HomeTeam.TeamName == "Alabama" || Model.AwayTeam.TeamName == "Alabama")
+    {
 
 
-     }
+    }*@
 
-        <h1>@Html.DisplayFor(model => model.GameName)</h1>
+    @*@<h1>@Html.DisplayFor(model => model.GameName)</h1>
 
-        <div>
-            <h4>@Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore) vs. @Html.DisplayFor(model => model.AwayTeam.TeamName) @Html.DisplayFor(model => model.AwayScore)</h4>
-                @if (Model.HomeTeam.TeamName == "Alabama")
-                {
-                     
-                }
-            <hr />
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.GameName)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.GameName)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Date)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Date)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Location)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Location.StadiumName)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.HomeTeam)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.HomeTeam.TeamName)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.HomeScore)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.HomeScore)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.AwayTeam)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.AwayTeam.TeamName)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.AwayScore)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.AwayScore)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Notes)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Notes)
-                </dd>
-            </dl>
+    <div>
+        <h4>@Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore) vs. @Html.DisplayFor(model => model.AwayTeam.TeamName) @Html.DisplayFor(model => model.AwayScore)</h4>
+        
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.GameName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.GameName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Location)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Location.StadiumName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HomeTeam)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HomeTeam.TeamName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HomeScore)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.HomeScore)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AwayTeam)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AwayTeam.TeamName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.AwayScore)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.AwayScore)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Notes)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Notes)
+            </dd>
+        </dl>
+
+    </div>
+
+    <div>*@
+}
+<div class="gameDetailsBody">
+    <div class="gameDetailsPoster">
+        <div class="iWasThere">
+            I Was There
         </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@Model.GameId">Edit</a> |
-            <a asp-action="Index">Back to List</a>
+        <div class="codepen">
         </div>
-        }
+        <div class="gameName">
+            @Html.DisplayFor(model => model.GameName)
+        </div>
+        <br>
+        <div class="homeTeam">
+            @Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore)
+        </div>
+        <br />
+        <div class="vs">
+            vs.
+        </div>
+        <div class="awayTeam">
+            @Html.DisplayFor(model => model.AwayTeam.TeamName) @Html.DisplayFor(model => model.AwayScore)
+        </div>
+        <div class="at">
+            at
+        </div>
+        <div class="stadium">
+            @Html.DisplayFor(model => model.Location.StadiumName)
+        </div>
+        <div class="cityState">
+            @Html.DisplayFor(model => model.Location.City), @Html.DisplayFor(model => model.Location.State)
+        </div>
+        <div class="on">
+            on
+        </div>
+        <div class="date-mon">
+            @Html.DisplayFor(model => model.Date)
+        </div>
+        <div class="date-year">
+        </div>
+        <div class="cityState">
+            @Html.DisplayFor(model => model.Notes)
+        </div>
+    </div>
+</div>
+    </div>
+
+<canvas id="drawing_canvas"></canvas>
+        <a asp-action="Edit" asp-route-id="@Model.GameId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+
+
+

@@ -16,6 +16,9 @@ namespace IWasThere.Models
         public virtual ICollection<Team> Teams { get; set; }
         public virtual Team AwayTeam { get; set; }
         public virtual Team HomeTeam { get; set; }
+
+       // [DisplayFormat(ConvertEmptyStringToNull = true)]
+       // [Display(Prompt = "Enter A Stadium")]
         public List<Location> Locations { get; set; }
         public Location LocationId { get; set; }
         public string Notes { get; set; }

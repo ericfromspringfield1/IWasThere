@@ -12,23 +12,24 @@ namespace IWasThere.Models
     {
         public int GameId { get; set; }
 
-        [Display(Name = "Game Name")]
+        [Display(Name = "Game Name", Prompt = "Enter Name Of Game")]
         public string GameName { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
 
-        [Display(Name = "Home Team")]
+        [Display(Name = "Home Team", Prompt = "Select A Home Team")]
         public int HomeTeamId { get; set; }
 
-        [Display(Name = "Away Team")]
+        [Display(Name = "Away Team", Prompt = "Select An Away Team")]
         public int AwayTeamId { get; set; }
 
         [Required]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
-        [Display(Name = "Stadium")]
+        
+        [Display(Prompt = "Select A Stadium", Name = "Stadium")]
         public int LocationId { get; set; }
 
         [Display(Name = "Stadium")]
@@ -41,14 +42,18 @@ namespace IWasThere.Models
         [Display(Name = "Away Team")]
         public virtual Team AwayTeam { get; set; }
 
-        [Display(Name = "Home Score")]
+        [Display(Name = "Home Score", Prompt = "Enter Home Team's Score")]
         public float HomeScore { get; set; }
 
-        [Display(Name = "Away Score")]
+        [Display(Name = "Away Score", Prompt = "Enter Away Team's Score")]
         public float AwayScore { get; set; }
 
-        [Display(Name = "Memories From That Day")]
+        [Display(Name = "Memories From That Day", Prompt = "What Are The Most Memorable Moments?")]
         public string Notes { get; set; }
+
+       /* [Display(Name = "Image")]
+        public string ImagePath { get; set; }
+        public bool Active { get; set; }*/
 
 
 
