@@ -74,12 +74,11 @@
         <div class="iWasThere">
             I Was There
         </div>
-        <div class="codepen">
+       <div class="codepen">
         </div>
         <div class="gameName">
             @Html.DisplayFor(model => model.GameName)
         </div>
-        <br>
         <div class="homeTeam">
             @Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore)
         </div>
@@ -112,7 +111,7 @@
         </div>
     </div>
 </div>
-    </div>
+    
 
 <canvas id="drawing_canvas"></canvas>
         <a asp-action="Edit" asp-route-id="@Model.GameId">Edit</a> |

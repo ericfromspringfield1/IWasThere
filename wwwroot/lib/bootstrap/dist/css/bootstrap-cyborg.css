@@ -55,9 +55,9 @@ gameDetailsbody {
 .gameName {
     font-weight: 100;
     text-transform: uppercase;
-    font-size: 104px;
+    font-size: 100px;
+    letter-spacing: 10px;
     line-height: 0.6;
-    text-indent: -11px;
     margin: 0 0 20px 0;
     text-align: center;
 }
@@ -71,9 +71,9 @@ gameDetailsbody {
 
 .homeTeam {
     text-transform: uppercase;
-    font-weight: 900;
+    font-weight: 500;
     font-size: 128px;
-    line-height: 1.1;
+    line-height: 0.8;
     text-align: center;
 }
 
@@ -166,7 +166,7 @@ gameDetailsbody {
     right: 0;
     pointer-events: none;
 }
-
+/*
 * {
     box-sizing: border-box;
 }
@@ -175,34 +175,35 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Float four columns side by side */
+
+/* Float four columns side by side 
 .column {
     float: left;
     width: 25%;
     padding: 0 10px;
 }
 
-/* Remove extra left and right margins, due to padding in columns */
+/* Remove extra left and right margins, due to padding in columns 
 .row {
     margin: 0 -5px;
 }
 
-    /* Clear floats after the columns */
+    /* Clear floats after the columns 
     .row:after {
         content: "";
         display: table;
         clear: both;
     }
 
-/* Style the counter cards */
+/* Style the counter cards 
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect 
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
 }
 
-/* Responsive columns - one column layout (vertical) on small screens */
+/* Responsive columns - one column layout (vertical) on small screens 
 @media screen and (max-width: 600px) {
     .column {
         width: 100%;
@@ -210,6 +211,7 @@ body {
         margin-bottom: 20px;
     }
 }
+*/
 
 
 :root {
