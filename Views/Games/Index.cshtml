@@ -10,134 +10,41 @@
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
 
-<p><img src="https://goblogorange.files.wordpress.com/2015/05/image.jpg" alt="Death Valley Tiger Stadium" height="400" width="900"></p>
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.GameName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Location)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HomeTeam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HomeScore)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AwayTeam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AwayScore)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.ImagePath)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GameName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location.StadiumName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HomeTeam.TeamName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HomeScore)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AwayTeam.TeamName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AwayScore)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.ImagePath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Active)
-                </td
-            <td>>
-                <a asp-action="Edit" asp-route-id="@item.GameId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.GameId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.GameId">Delete</a>
-                </td>
-
-            </tr>
-            }
-        </tbody>
-    </table>*@
-
 
 @foreach (var item in Model)
 
 {
-    <div class="row">
-        <div class="column">
+
+    <div class="gameCardColumn">
+        <div class="gameCardRow">
             <div class="card">
-                @Html.DisplayFor(modelItem => item.GameName)
-                <br />
-                @Html.DisplayFor(modelItem => item.Date)
-                <br />
-                @Html.DisplayFor(modelItem => item.Location.StadiumName)
-                <br />
-                @Html.DisplayFor(modelItem => item.HomeTeam.TeamName) @Html.DisplayFor(modelItem => item.HomeScore)
-                <br />
-                @Html.DisplayFor(modelItem => item.AwayTeam.TeamName) @Html.DisplayFor(modelItem => item.AwayScore)
+                <div class="cityState">
+                    @Html.DisplayFor(modelItem => item.GameName)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Date)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.Location.StadiumName)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.HomeTeam.TeamName) @Html.DisplayFor(modelItem => item.HomeScore)
+                    <br />
+                    @Html.DisplayFor(modelItem => item.AwayTeam.TeamName) @Html.DisplayFor(modelItem => item.AwayScore)
 
-                <style>
-                    .column {
-                        float: left;
-                        width: 25%;
-                        padding: 0 10px;
-                    }
-
-                    .row {
-                        margin: 0 -5px;
-                         }
-
-                    .row:after {
-                        content: "";
-                        display: table;
-                        clear: both;
-                    }
-
-                    .card {
-                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-                        padding: 16px;
-                        text-align: center;
-                        background-color: #f1f1f1;
-                    }
-
-
-                </style>
-            </div>
-            <div>
-                <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.GameId">Edit</a>
-                <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.GameId">Details</a>
-                <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.GameId">Delete</a>
+                    <div>
+                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.GameId">Edit</a>
+                        <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.GameId">Details</a>
+                        <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.GameId">Delete</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <br />
+
+
+   
+   
 }
+   
 
 
 

@@ -71,27 +71,24 @@
 }
 <div class="gameDetailsBody">
     <div class="gameDetailsPoster">
-        <div class="iWasThere">
-            I Was There
-        </div>
-       <div class="codepen">
-        </div>
+        
         <div class="gameName">
             @Html.DisplayFor(model => model.GameName)
         </div>
-        <div class="homeTeam">
+        <div class="awayTeam">
             @Html.DisplayFor(model => model.HomeTeam.TeamName) @Html.DisplayFor(model => model.HomeScore)
         </div>
-        <br />
         <div class="vs">
             vs.
         </div>
         <div class="awayTeam">
             @Html.DisplayFor(model => model.AwayTeam.TeamName) @Html.DisplayFor(model => model.AwayScore)
         </div>
+        <br />
         <div class="at">
             at
         </div>
+        <br />
         <div class="stadium">
             @Html.DisplayFor(model => model.Location.StadiumName)
         </div>

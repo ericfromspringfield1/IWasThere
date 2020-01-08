@@ -23,7 +23,7 @@
     color: red;
 }
 
-gameDetailsbody {
+.gameDetailsbody {
     font-family: 'Lato', sans-serif;
     background: black;
     color: white;
@@ -71,9 +71,9 @@ gameDetailsbody {
 
 .homeTeam {
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 900;
     font-size: 128px;
-    line-height: 0.8;
+    line-height: 1.1;
     text-align: center;
 }
 
@@ -81,6 +81,13 @@ gameDetailsbody {
     text-transform: uppercase;
     font-weight: 900;
     font-size: 128px;
+    line-height: 1.1;
+    text-align: center;
+}
+
+.gameIndexCard {
+    font-weight: 700;
+    font-size: 60px;
     line-height: 1.1;
     text-align: center;
 }
@@ -176,8 +183,8 @@ body {
 }
 
 
-/* Float four columns side by side 
-.column {
+/*Float four columns side by side 
+.gameColumn {
     float: left;
     width: 25%;
     padding: 0 10px;
@@ -213,6 +220,17 @@ body {
 }
 */
 
+.gameCardColumn {
+    float: left;
+    width: 25%;
+    padding-bottom: 15px;
+  
+    
+}
+
+.gameCardRow {
+    margin: 0 -5px;
+}
 
 :root {
     --blue: #2A9FD6;
@@ -1772,7 +1790,7 @@ pre code {
         -ms-flex-order: 6;
             order: 6;
   }
-  .order-lg-7 {
+  .order-lg-7
     -webkit-box-ordinal-group: 8;
         -ms-flex-order: 7;
             order: 7;
@@ -5393,6 +5411,8 @@ input[type="button"].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+
+
 
 .card > hr {
   margin-right: 0;
