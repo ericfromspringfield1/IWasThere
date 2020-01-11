@@ -15,35 +15,28 @@
 
 {
 
-    <div class="gameCardColumn">
+   
         <div class="gameCardRow">
-            <div class="card">
-                <div class="cityState">
-                    @Html.DisplayFor(modelItem => item.GameName)
-                    <br />
-                    @Html.DisplayFor(modelItem => item.Date)
-                    <br />
-                    @Html.DisplayFor(modelItem => item.Location.StadiumName)
-                    <br />
-                    @Html.DisplayFor(modelItem => item.HomeTeam.TeamName) @Html.DisplayFor(modelItem => item.HomeScore)
-                    <br />
-                    @Html.DisplayFor(modelItem => item.AwayTeam.TeamName) @Html.DisplayFor(modelItem => item.AwayScore)
-
-                    <div>
+            
+                   <div class="cityState">
+                    <b>@Html.DisplayFor(modelItem => item.GameName)</b> |
+                      <b> @Html.DisplayFor(modelItem => item.Date) </b>|
+                    <i> @Html.DisplayFor(modelItem => item.Location.StadiumName) </i> |
+                       <br />
+                    <b>@Html.DisplayFor(modelItem => item.HomeTeam.TeamName) @Html.DisplayFor(modelItem => item.HomeScore) </b> 
+                    <b> @Html.DisplayFor(modelItem => item.AwayTeam.TeamName) @Html.DisplayFor(modelItem => item.AwayScore) </b> 
+                    <div class="card">
                         <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.GameId">Edit</a>
                         <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.GameId">Details</a>
                         <a asp-action="Delete" class="btn btn-primary" asp-route-id="@item.GameId">Delete</a>
                     </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <br />
+         
 
-
-   
-   
 }
+             
+          
    
 
 

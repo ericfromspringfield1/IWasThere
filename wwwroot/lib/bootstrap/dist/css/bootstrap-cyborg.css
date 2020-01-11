@@ -134,6 +134,16 @@
     text-align: center;
 }
 
+date-mon2 {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 20px;
+    text-indent: -3px;
+    line-height: 0.9;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
 .date-year {
     font-weight: 100;
     text-transform: uppercase;
@@ -223,14 +233,30 @@ body {
 .gameCardColumn {
     float: left;
     width: 25%;
-    padding-bottom: 15px;
-  
-    
+    padding-bottom: 15px; 
 }
-
 .gameCardRow {
     margin: 0 -5px;
 }
+
+.cardGameName {
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+.cardGameDate {
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+
+
 
 :root {
     --blue: #2A9FD6;
@@ -5410,6 +5436,7 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  
 }
 
 
